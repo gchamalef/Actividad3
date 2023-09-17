@@ -17,6 +17,7 @@ public class frm_empleados extends javax.swing.JFrame {
         initComponents();
         empleado = new Empleado();
         tbl_empleados.setModel(empleado.leer());
+        cmbox_puesto.setModel(empleado.leer_puesto());
     }
 
     /**
@@ -54,6 +55,8 @@ public class frm_empleados extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_empleados = new javax.swing.JTable();
         cmbox_puesto = new javax.swing.JComboBox<>();
+        lbl_id_puesto = new javax.swing.JLabel();
+        btn_limpiar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -137,6 +140,13 @@ public class frm_empleados extends javax.swing.JFrame {
             }
         });
 
+        btn_limpiar.setText("Limpiar");
+        btn_limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_limpiarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnl_principalLayout = new javax.swing.GroupLayout(pnl_principal);
         pnl_principal.setLayout(pnl_principalLayout);
         pnl_principalLayout.setHorizontalGroup(
@@ -166,38 +176,47 @@ public class frm_empleados extends javax.swing.JFrame {
                             .addComponent(txt_direccion)
                             .addComponent(txt_telefono)
                             .addComponent(txt_fn))))
-                .addGap(34, 34, 34)
-                .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnl_principalLayout.createSequentialGroup()
-                        .addComponent(lbl_puesto)
-                        .addGap(18, 18, 18)
-                        .addComponent(cmbox_puesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(pnl_principalLayout.createSequentialGroup()
+                                .addComponent(lbl_puesto)
+                                .addGap(18, 18, 18)
+                                .addComponent(cmbox_puesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(lbl_id_puesto, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(pnl_principalLayout.createSequentialGroup()
+                                .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lbl_sueldo)
+                                    .addComponent(lbl_bono))
+                                .addGap(18, 18, 18)
+                                .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txt_sueldo)
+                                    .addComponent(txt_bono)))))
                     .addGroup(pnl_principalLayout.createSequentialGroup()
-                        .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lbl_sueldo)
-                            .addComponent(lbl_bono))
-                        .addGap(18, 18, 18)
-                        .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txt_sueldo)
-                            .addComponent(txt_bono)))
-                    .addGroup(pnl_principalLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_agregar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_actualizar)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_eliminar)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_eliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btn_limpiar)))
+                .addContainerGap(44, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
         pnl_principalLayout.setVerticalGroup(
             pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnl_principalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lbl_id)
-                    .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lbl_puesto)
-                    .addComponent(cmbox_puesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lbl_id)
+                        .addComponent(txt_id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_puesto)
+                        .addComponent(cmbox_puesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lbl_id_puesto, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnl_principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbl_codigo)
@@ -228,7 +247,8 @@ public class frm_empleados extends javax.swing.JFrame {
                     .addComponent(txt_fn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_agregar)
                     .addComponent(btn_actualizar)
-                    .addComponent(btn_eliminar))
+                    .addComponent(btn_eliminar)
+                    .addComponent(btn_limpiar))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 302, Short.MAX_VALUE))
         );
@@ -253,9 +273,12 @@ public class frm_empleados extends javax.swing.JFrame {
 
     private void btn_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_agregarActionPerformed
         // TODO add your handling code here:
-        empleado = new Empleado(txt_codigo.getText(), Float.parseFloat(txt_sueldo.getText()), Float.parseFloat(txt_bono.getText()), 0, Integer.parseInt(txt_puesto.getText()), txt_nombres.getText(), txt_apellidos.getText(), txt_direccion.getText(), txt_telefono.getText(), this.txt_fn.getText());
+        String id_puesto = cmbox_puesto.getSelectedItem().toString();
+        int posc = id_puesto.indexOf(')');
+        empleado = new Empleado(txt_codigo.getText(), Float.parseFloat(txt_sueldo.getText()), Float.parseFloat(txt_bono.getText()), 0, Integer.parseInt(id_puesto.substring(0, posc)), txt_nombres.getText(), txt_apellidos.getText(), txt_direccion.getText(), txt_telefono.getText(), this.txt_fn.getText());
         empleado.crear();
         tbl_empleados.setModel(empleado.leer());
+        limpiar_datos();
     }//GEN-LAST:event_btn_agregarActionPerformed
     
     public void select_datos(){
@@ -267,9 +290,22 @@ public class frm_empleados extends javax.swing.JFrame {
         txt_direccion.setText(tbl_empleados.getValueAt(fila, 4).toString());
         txt_telefono.setText(tbl_empleados.getValueAt(fila, 5).toString());
         txt_fn.setText(tbl_empleados.getValueAt(fila, 6).toString());
-        txt_puesto.setText(tbl_empleados.getValueAt(fila, 7).toString());
+        cmbox_puesto.setSelectedItem(tbl_empleados.getValueAt(fila, 7));
         txt_sueldo.setText(tbl_empleados.getValueAt(fila, 8).toString());
         txt_bono.setText(tbl_empleados.getValueAt(fila, 9).toString());
+    }
+    
+    public void limpiar_datos(){
+        txt_id.setText("");
+        txt_codigo.setText("");
+        txt_nombres.setText("");
+        txt_apellidos.setText("");
+        txt_direccion.setText("");
+        txt_telefono.setText("");
+        txt_fn.setText("");
+        cmbox_puesto.setSelectedItem("0) Seleccione puesto.");
+        txt_sueldo.setText("");
+        txt_bono.setText("");
     }
     
     private void tbl_empleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_empleadosMouseClicked
@@ -284,9 +320,12 @@ public class frm_empleados extends javax.swing.JFrame {
 
     private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
         // TODO add your handling code here:
-        empleado = new Empleado(txt_codigo.getText(), Float.parseFloat(txt_sueldo.getText()), Float.parseFloat(txt_bono.getText()), Integer.parseInt(txt_id.getText()), Integer.parseInt(txt_puesto.getText()), txt_nombres.getText(), txt_apellidos.getText(), txt_direccion.getText(), txt_telefono.getText(), this.txt_fn.getText());
+        String id_puesto = cmbox_puesto.getSelectedItem().toString();
+        int posc = id_puesto.indexOf(')');
+        empleado = new Empleado(txt_codigo.getText(), Float.parseFloat(txt_sueldo.getText()), Float.parseFloat(txt_bono.getText()), Integer.parseInt(txt_id.getText()), Integer.parseInt(id_puesto.substring(0, posc)), txt_nombres.getText(), txt_apellidos.getText(), txt_direccion.getText(), txt_telefono.getText(), this.txt_fn.getText());
         empleado.actualizar();
         tbl_empleados.setModel(empleado.leer());
+        limpiar_datos();
     }//GEN-LAST:event_btn_actualizarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
@@ -295,11 +334,20 @@ public class frm_empleados extends javax.swing.JFrame {
         empleado.setId(Integer.parseInt(txt_id.getText()));
         empleado.borrar();
         tbl_empleados.setModel(empleado.leer());
+        limpiar_datos();
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
     private void cmbox_puestoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbox_puestoActionPerformed
         // TODO add your handling code here:
+        String id_puesto = this.cmbox_puesto.getSelectedItem().toString();
+        int posc = id_puesto.indexOf(')');
+        lbl_id_puesto.setText(id_puesto.substring(0, posc));
     }//GEN-LAST:event_cmbox_puestoActionPerformed
+
+    private void btn_limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_limpiarActionPerformed
+        // TODO add your handling code here:
+        limpiar_datos();
+    }//GEN-LAST:event_btn_limpiarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,6 +388,7 @@ public class frm_empleados extends javax.swing.JFrame {
     private javax.swing.JButton btn_actualizar;
     private javax.swing.JButton btn_agregar;
     private javax.swing.JButton btn_eliminar;
+    private javax.swing.JButton btn_limpiar;
     private javax.swing.JComboBox<String> cmbox_puesto;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lbl_apellidos;
@@ -348,6 +397,7 @@ public class frm_empleados extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_direccion;
     private javax.swing.JLabel lbl_fn;
     private javax.swing.JLabel lbl_id;
+    private javax.swing.JLabel lbl_id_puesto;
     private javax.swing.JLabel lbl_nombres;
     private javax.swing.JLabel lbl_puesto;
     private javax.swing.JLabel lbl_sueldo;

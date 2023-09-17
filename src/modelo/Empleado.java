@@ -6,6 +6,7 @@ package modelo;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 /**
  *
@@ -98,6 +99,24 @@ public class Empleado extends Persona {
         }
         
         return tabla;
+    }
+    public DefaultComboBoxModel leer_puesto(){
+        DefaultComboBoxModel combo = new DefaultComboBoxModel();
+        try{
+            cn = new Conexion();
+            cn.abrir_conexion();
+            String query;
+            query = "select id_puesto as id, puesto from puestos";
+            ResultSet consulta = cn.conexionBD.createStatement().executeQuery(query);
+            combo.addElement("0) Seleccione puesto.");
+            while(consulta.next()){
+                combo.addElement(consulta.getString("id")+") "+consulta.getString("puesto"));
+            }
+            cn.cerrar_conexion();
+        } catch(SQLException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return combo;
     }
 
     @Override
